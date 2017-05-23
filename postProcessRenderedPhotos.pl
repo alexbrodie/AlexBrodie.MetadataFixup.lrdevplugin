@@ -1,4 +1,4 @@
-#!perl
+#!/usr/bin/perl
 
 #BEGIN {
 #   use File::Spec;
@@ -132,11 +132,12 @@ sub processImage ($) {
 	# For some reason WriteInfo is not setting FileModifyDate
 	$exifTool->SetFileModifyDate($target);
 
+    # TODO: replace this windows implementation on mac if it's a problem
 	# ExifTool uses the current daylight savings time zone adjustment
 	# rather than that of the date being set. So use something better
 	# for that. Can't use this for others because WIC via PropSys has
 	# metadata size limitations that are easily hit.
-	psCall("\"$target\" -System.DateModified:=System.Photo.DateTaken");
+	#psCall("\"$target\" -System.DateModified:=System.Photo.DateTaken");
 }
 
 #--------------------------------------------------------------------------

@@ -1,3 +1,8 @@
+--[[----------------------------------------------------------------------------
+
+Export settings dialog
+
+------------------------------------------------------------------------------]]
 
 local LrApplication = import 'LrApplication'
 local LrDialogs = import 'LrDialogs'

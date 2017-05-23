@@ -200,21 +200,23 @@ local function postProcessRenderedPhotos( functionContext, filterContext )
 				f:write(k .. "=" .. tostring(v) .. "\n")
 			end
 			f:close()
+            
+            if MAC_ENV then sep = '/' else sep = '\\' end
 
-			local cmd = '"perl.exe'
-			cmd = cmd .. ' "-I' .. _PLUGIN.path .. '\\lib"'
-			cmd = cmd .. ' "' .. _PLUGIN.path .. '\\postProcessRenderedPhotos.pl"'
+			local cmd = 'perl'
+			cmd = cmd .. ' "-I' .. _PLUGIN.path .. sep .. 'lib"'
+			cmd = cmd .. ' "' .. _PLUGIN.path .. sep .. 'postProcessRenderedPhotos.pl"'
 			cmd = cmd .. ' "-metadata=' .. metadataPath .. '"'
 			cmd = cmd .. ' "-source='   .. photo:getRawMetadata('path') .. '"'
-			cmd = cmd .. ' "-target='   .. pathOrMessage .. '" "'
-			
+			cmd = cmd .. ' "-target='   .. pathOrMessage .. '"'
+
 			local status = LrTasks.execute( cmd )
 			if status ~= 0 then
-				renditionToSatisfy:renditionIsDone( false, "Alex's Metadata Post Process failure: " .. status .. cmd )
-			end
-			
-			LrFileUtils.delete(metadataPath)
+				renditionToSatisfy:renditionIsDone( false, "Alex's Metadata Post Process failure: " .. status .. " " .. cmd )
+                    end
 
+			LrFileUtils.delete(metadataPath)
+            
 			--[[
 			-- Lightroom props: http://www.robcole.com/Lightroom/SDK%203.0/API%20Reference/modules/LrPhoto.html
 			-- Propsys keys: http://msdn.microsoft.com/en-us/library/windows/desktop/dd561977(v=vs.85).aspx
