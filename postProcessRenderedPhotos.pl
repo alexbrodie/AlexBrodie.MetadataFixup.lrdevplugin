@@ -6,6 +6,7 @@ use strict;
 use File::Glob qw(:glob);
 use File::Spec;
 use Image::ExifTool qw(:Public);
+use MP4::File;
 use Time::Local qw(timelocal);
 use POSIX qw(strftime);
 
@@ -140,6 +141,9 @@ sub processMp4($) {
 	
     my $target = getFileArg($argsRef, TARGET);
     my $mdRef = $argsRef->{METADATA};
+    
+    $mp4 = MP4::File->new;
+    $mp4->Modify($target);
 }
 
 #--------------------------------------------------------------------------

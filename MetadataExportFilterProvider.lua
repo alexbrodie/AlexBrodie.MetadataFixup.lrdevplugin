@@ -215,7 +215,7 @@ local function getMetadata( photo )
                         renditionToSatisfy:renditionIsDone( false, "Alex's Metadata Post Process failure: " .. status .. " " .. cmd )
                     end
 
-                    LrFileUtils.delete(metadataPath)
+                    --LrFileUtils.delete(metadataPath)
             
                     --[[
                     -- Lightroom props: http://www.robcole.com/Lightroom/SDK%203.0/API%20Reference/modules/LrPhoto.html
